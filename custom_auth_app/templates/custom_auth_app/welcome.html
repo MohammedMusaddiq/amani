@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ title }}
+{% endblock title %}
+{% block css %}
+    <style>
+    .content-center{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        }
+    </style>
+{% endblock css %}
+{% block navbar %}
+    {% include "components/navbar.html" %}
+{% endblock navbar %}
+{% block content %}
+    <div class="container">
+        <div class="row p-4 content-center">
+            <div class="card text-center shadow-custom">
+                <div class="card-body">
+                    <h1 class="card-text">Welcome To Digi Academy</h1>
+                    <a href="{% url 'custom_auth_app:student_login' %}"
+                       class="btn btn-primary mx-2 my-2">Student</a>
+                    <a href="{% url 'custom_auth_app:teacher_login' %}"
+                       class="btn btn-primary mx-2 my-2">Teacher</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block footer %}
+    {% include "components/footer.html" %}
+{% endblock footer %}

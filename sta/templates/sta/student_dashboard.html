@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ title }}
+{% endblock title %}
+{% block css %}
+    <style>
+        .content-center{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .height-adjustment{
+            min-height: 100vh;
+        }
+    </style>
+{% endblock css %}
+{% block navbar %}
+    {% include "components/navbar.html" %}
+{% endblock navbar %}
+{% block content %}
+    <div class="container height-adjustment">
+        <div>{% include "components/alert.html" %}</div>
+        <div class="row p-4">
+            <div class="card shadow-custom">
+                <div class="card-body">
+                    <h4>USERNAME: {{ request.user.username|title }}</h4>
+                    <h4>BRANCH: {{ student.branch|title }}</h4>
+                    <h4>SEMESTER: {{ student.semester }}</h4>
+                    <h4>USN: {{ student.roll_no }}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block footer %}
+    {% include "components/footer.html" %}
+{% endblock footer %}

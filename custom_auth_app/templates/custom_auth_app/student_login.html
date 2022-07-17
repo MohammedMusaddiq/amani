@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ title }}
+{% endblock title %}
+{% block css %}
+    <style>
+    .content-center{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        }
+    </style>
+{% endblock css %}
+{% block navbar %}
+    {% include "components/navbar.html" %}
+{% endblock navbar %}
+{% block content %}
+    <div class="container">
+        <div class="row p-4 content-center">
+            <div class="card shadow-custom">
+                <div class="card-body">
+                    <h1 class="card-text">Stuudent Login</h1>
+                    <div class="my-1">
+                        {% include "components/alert.html" %}
+                    </div>
+                    <form action="#" method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="submit" value="Login" class="btn btn-success"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block footer %}
+    {% include "components/footer.html" %}
+{% endblock footer %}
