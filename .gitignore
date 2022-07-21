@@ -2,5 +2,5 @@
 _cmaenv_
 .idea
 migrations
-__pycache__
+__pycache__/
 gittoken.txt
