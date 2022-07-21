@@ -4,3 +4,4 @@ _cmaenv_
 migrations
 __pycache__/
 gittoken.txt
+*.pyc
