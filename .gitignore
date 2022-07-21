@@ -2,8 +2,5 @@
 _cmaenv_
 .idea
 migrations
-core/__pycache__/
-custom_auth_app/__pycache__/
-sta/__pycache__/
+__pycache__
 gittoken.txt
-db.sqlite3
