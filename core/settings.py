@@ -39,9 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary',
+    'cloudinary_storage',
+    'fontawesomefree',
     'custom_auth_app.apps.CustomAuthAppConfig',
     'sta.apps.StaConfig',
-    'fontawesomefree',
+
 
 ]
 
@@ -127,6 +130,8 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -139,4 +144,11 @@ AUTH_USER_MODEL = 'custom_auth_app.User'
 MESSAGE_TAGS = {
     messages.SUCCESS: 'success',
     messages.ERROR: 'danger',
+}
+
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'college-management',
+    'API_KEY': '889255415477898',
+    'API_SECRET': 'UWUhF48eFxRmBzGN2yF9jH64czU'
 }

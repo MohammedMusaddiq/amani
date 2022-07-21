@@ -14,7 +14,13 @@ urlpatterns = [
     # teacher endpoints
     path('t/', views.teacher_dashboard, name='teacher_dashboard'),
     path('t/assignments/', views.tea_assignments, name='tea_assignments'),
+    path('t/assignments/create/', views.create_assignment, name='create_assignment'),
+    path('t/assignments/edit/<int:pk>/', views.edit_assignment, name='edit_assignment'),
+    path('t/assignments/delete/<int:pk>/', views.delete_assignment, name='delete_assignment'),
     path('t/study_material/', views.tea_study_material, name='tea_study_material'),
+    path('t/study_material/create/', views.create_study_material, name='create_study_material'),
+    path('t/study_material/edit/<int:pk>/', views.edit_study_material, name='edit_study_material'),
+    path('t/study_material/delete/<int:pk>/', views.delete_study_material, name='delete_study_material'),
     path('t/question_forum/', views.tea_question_forum, name='tea_question_forum'),
     path('t/announcements/', views.tea_announcements, name='tea_announcements'),
 ]

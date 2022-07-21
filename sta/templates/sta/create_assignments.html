@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ title }}
+{% endblock title %}
+{% block css %}
+    <style>
+        .content-center{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .height-adjustment{
+            min-height: 100vh;
+        }
+    </style>
+{% endblock css %}
+{% block navbar %}
+    {% include "components/navbar.html" %}
+{% endblock navbar %}
+{% block content %}
+    <div class="container height-adjustment">
+        <div>{% include "components/alert.html" %}</div>
+        <div class="row p-4 content-center">
+            <div class="card shadow-custom">
+                <div class="card-body">
+                    <div class="row">
+                        <h5 class="text-muted text-center">Create / Edit Assignment</h5>
+                        <hr/>
+                        <form action="{% url 'sta:create_assignment' %}"
+                              method="post"
+                              enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <input type="submit" value="Submit" class="btn btn-block btn-success"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block footer %}
+    {% include "components/footer.html" %}
+{% endblock footer %}
