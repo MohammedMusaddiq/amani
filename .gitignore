@@ -5,3 +5,4 @@ migrations
 __pycache__/
 gittoken.txt
 *.pyc
+db.sqlite3
