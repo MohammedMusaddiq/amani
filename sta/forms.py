@@ -1,4 +1,3 @@
-from tkinter import Place
 from django import forms
 from .models import Assignment, StudyMaterial, Announcement
 
