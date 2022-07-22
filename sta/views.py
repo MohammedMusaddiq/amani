@@ -3,10 +3,12 @@ from django.shortcuts import redirect, render
 from custom_auth_app.models import Student, Teacher
 from sta.forms import AssignmentForm, StudyMaterialForm, AnnouncementForm
 from sta.models import Assignment, StudyMaterial, Announcement
+from .decorators import student_required, teacher_required
 
 
 # student views
 
+@student_required
 def student_dashboard(request):
     student = Student.objects.get(user=request.user)
     context = {
@@ -17,6 +19,7 @@ def student_dashboard(request):
     return render(request, 'sta/student_dashboard.html', context)
 
 
+@student_required
 def stu_assignments(request):
     user = request.user
     student = Student.objects.get(user=user)
@@ -29,6 +32,7 @@ def stu_assignments(request):
     return render(request, 'sta/stu_assignments.html', context)
 
 
+@student_required
 def stu_study_material(request):
     user = request.user
     student = Student.objects.get(user=user)
@@ -41,6 +45,7 @@ def stu_study_material(request):
     return render(request, 'sta/stu_study_material.html', context)
 
 
+@student_required
 def stu_question_forum(request):
     context = {
         'title': 'Student Question Forum',
@@ -49,6 +54,7 @@ def stu_question_forum(request):
     return render(request, 'sta/stu_question_forum.html', context)
 
 
+@student_required
 def seat_allotment(request):
     context = {
         'title': 'Seat Allotment',
@@ -57,6 +63,7 @@ def seat_allotment(request):
     return render(request, 'sta/seat_allotment.html', context)
 
 
+@student_required
 def stu_announcements(request):
     user = request.user
     student = Student.objects.get(user=user)
@@ -71,6 +78,7 @@ def stu_announcements(request):
 
 # teacher views
 
+@teacher_required
 def teacher_dashboard(request):
     teacher = Teacher.objects.get(user=request.user)
     context = {
@@ -81,6 +89,7 @@ def teacher_dashboard(request):
     return render(request, 'sta/teacher_dashboard.html', context)
 
 
+@teacher_required
 def tea_assignments(request):
     user = request.user
     assignments = Assignment.objects.filter(teacher=user)
@@ -92,6 +101,7 @@ def tea_assignments(request):
     return render(request, 'sta/tea_assignments.html', context)
 
 
+@teacher_required
 def create_assignment(request):
     teacher = request.user
     form = AssignmentForm()
@@ -112,6 +122,7 @@ def create_assignment(request):
     return render(request, 'sta/create_assignments.html', context)
 
 
+@teacher_required
 def edit_assignment(request, pk):
     assignment = Assignment.objects.get(pk=pk)
     form = AssignmentForm(instance=assignment)
@@ -129,12 +140,14 @@ def edit_assignment(request, pk):
     return render(request, 'sta/tea_edit_assignment.html', context)
 
 
+@teacher_required
 def delete_assignment(request, pk):
     assignment = Assignment.objects.get(pk=pk)
     assignment.delete()
     return redirect('sta:tea_assignments')
 
 
+@teacher_required
 def tea_study_material(request):
     user = request.user
     study_materials = StudyMaterial.objects.filter(teacher=user)
@@ -146,6 +159,7 @@ def tea_study_material(request):
     return render(request, 'sta/tea_study_material.html', context)
 
 
+@teacher_required
 def create_study_material(request):
     form = StudyMaterialForm()
     if request.method == 'POST':
@@ -165,6 +179,7 @@ def create_study_material(request):
     return render(request, 'sta/create_studymaterial.html', context)
 
 
+@teacher_required
 def edit_study_material(request, pk):
     study_material = StudyMaterial.objects.get(pk=pk)
     form = StudyMaterialForm(instance=study_material)
@@ -182,12 +197,14 @@ def edit_study_material(request, pk):
     return render(request, 'sta/edit_studymaterial.html', context)
 
 
+@teacher_required
 def delete_study_material(request, pk):
     study_material = StudyMaterial.objects.get(pk=pk)
     study_material.delete()
     return redirect('sta:tea_study_material')
 
 
+@teacher_required
 def tea_question_forum(request):
     context = {
         'title': 'Teacher Questions Forum',
@@ -196,6 +213,7 @@ def tea_question_forum(request):
     return render(request, 'sta/tea_question_forum.html', context)
 
 
+@teacher_required
 def tea_announcements(request):
     user = request.user
     announcements = Announcement.objects.filter(teacher=user)
@@ -207,6 +225,7 @@ def tea_announcements(request):
     return render(request, 'sta/tea_announcements.html', context)
 
 
+@teacher_required
 def create_announcement(request):
     form = AnnouncementForm()
     if request.method == 'POST':
@@ -226,6 +245,7 @@ def create_announcement(request):
     return render(request, 'sta/create_announcement.html', context)
 
 
+@teacher_required
 def edit_announcement(request, pk):
     announcement = Announcement.objects.get(pk=pk)
     form = AnnouncementForm(instance=announcement)
@@ -243,6 +263,7 @@ def edit_announcement(request, pk):
     return render(request, 'sta/edit_announcement.html', context)
 
 
+@teacher_required
 def delete_announcement(request, pk):
     announcement = Announcement.objects.get(pk=pk)
     announcement.delete()

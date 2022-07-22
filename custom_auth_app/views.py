@@ -24,10 +24,14 @@ def student_login(request):
             user = authenticate(request, username=username, password=password)
             if user is not None and user.is_student:
                 login(request, user)
-                messages.success(request, 'Welcome ' + user.username)
-                return redirect('sta:student_dashboard',)
+                messages.success(request, f'Welcome {user.username}')
+                if 'next' in request.GET:
+                    return redirect(request.GET['next'])
+                return redirect('sta:student_dashboard', )
             else:
                 messages.error(request, 'Invalid username or password')
+                if 'next' in request.GET:
+                    return redirect(request.GET['next'])
                 return redirect('custom_auth_app:student_login')
     else:
         form = StudentLoginForm()
@@ -43,10 +47,14 @@ def teacher_login(request):
             user = authenticate(request, username=username, password=password)
             if user is not None and user.is_teacher:
                 login(request, user)
-                messages.success(request, 'Welcome ' + user.username)
-                return redirect('sta:teacher_dashboard',)
+                messages.success(request, f'Welcome {user.username}')
+                if 'next' in request.GET:
+                    return redirect(request.GET['next'])
+                return redirect('sta:teacher_dashboard', )
             else:
                 messages.error(request, 'Invalid username or password')
+                if 'next' in request.GET:
+                    return redirect(request.GET['next'])
                 return redirect('custom_auth_app:teacher_login')
     else:
         form = TeacherLoginForm()
