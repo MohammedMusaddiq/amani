@@ -1,10 +1,7 @@
-from multiprocessing import context
-from turtle import title
-from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .models import User, Student, Teacher
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, redirect
+
 from .forms import StudentLoginForm, TeacherLoginForm
 
 

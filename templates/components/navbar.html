@@ -47,10 +47,12 @@
                 <!-- Icons -->
                 <ul class="navbar-nav d-flex flex-row me-1">
                     <li class="nav-item me-3 me-lg-0">
-                        <a class="nav-link" href="#"><i class="fa-solid fa-user-check mx-1"></i>{{ request.user.username }}</a>
+                        <a class="nav-link" href="#"><i
+                                class="fa-solid fa-user-check mx-1"></i>{{ request.user.username }}</a>
                     </li>
                     <li class="nav-item me-3 me-lg-0">
-                        <a class="nav-link" href="{% url 'custom_auth_app:logout' %}"><i class="fa-solid fa-right-from-bracket mx-1"></i>Logout</a>
+                        <a class="nav-link" href="{% url 'custom_auth_app:logout' %}"><i
+                                class="fa-solid fa-right-from-bracket mx-1"></i>Logout</a>
                     </li>
                 </ul>
             {% elif user.is_authenticated and user.is_teacher %}
@@ -80,10 +82,12 @@
                 <!-- Icons -->
                 <ul class="navbar-nav d-flex flex-row me-1">
                     <li class="nav-item me-3 me-lg-0">
-                        <a class="nav-link" href="#"><i class="fa-solid fa-user-check mx-1"></i>{{ request.user.username }}</a>
+                        <a class="nav-link" href="#"><i
+                                class="fa-solid fa-user-check mx-1"></i>{{ request.user.username }}</a>
                     </li>
                     <li class="nav-item me-3 me-lg-0">
-                        <a class="nav-link" href="{% url 'custom_auth_app:logout' %}"><i class="fa-solid fa-right-from-bracket mx-1"></i>Logout</a>
+                        <a class="nav-link" href="{% url 'custom_auth_app:logout' %}"><i
+                                class="fa-solid fa-right-from-bracket mx-1"></i>Logout</a>
                     </li>
                 </ul>
             {% endif %}

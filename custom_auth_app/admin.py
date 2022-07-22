@@ -9,8 +9,8 @@ class UserAdmin(AuthAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = User
-    list_display = ('username',  'is_student', 'is_teacher', 'is_active',)
-    list_filter = ('username',  'is_student', 'is_teacher', 'is_active',)
+    list_display = ('username', 'is_student', 'is_teacher', 'is_active',)
+    list_filter = ('username', 'is_student', 'is_teacher', 'is_active',)
     fieldsets = (
         (None, {'fields': ('username', 'password',)}),
         ('Permissions', {'fields': ('is_staff', 'is_superuser',
@@ -19,7 +19,8 @@ class UserAdmin(AuthAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'password1', 'password2', 'is_superuser', 'is_staff', 'is_active', 'is_student', 'is_teacher')}
+            'fields': (
+            'username', 'password1', 'password2', 'is_superuser', 'is_staff', 'is_active', 'is_student', 'is_teacher')}
          ),
     )
     search_fields = ('username',)
@@ -50,11 +51,11 @@ admin.site.register(Student, StudentAdmin)
 class TeacherAdmin(admin.ModelAdmin):
     inlines = [SubjectInline, ]
     list_display = ('user', 'branch',)
-    list_filter = ('user', 'branch', )
+    list_filter = ('user', 'branch',)
     fieldsets = (
-        (None, {'fields': ('user', 'branch', )}),
+        (None, {'fields': ('user', 'branch',)}),
     )
-    search_fields = ('user', 'branch', )
+    search_fields = ('user', 'branch',)
     ordering = ('user',)
 
 

@@ -59,7 +59,8 @@
                                         <td>{{ a.assignment_name }}</td>
                                         <td>{{ a.assignment_description }}</td>
                                         <td>
-                                            <a href="{% if a.assignment_file %}{{ a.assignment_file.url }}{% else %}#{% endif %}">File</a>
+                                            <a href="
+                                                    {% if a.assignment_file %}{{ a.assignment_file.url }}{% else %}#{% endif %}">File</a>
                                         </td>
                                         <td>{{ a.assignment_date|date }}</td>
                                         <td>{{ a.assignment_deadline|date }}</td>
