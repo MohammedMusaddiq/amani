@@ -44,3 +44,20 @@ class StudyMaterialForm(forms.ModelForm):
             'study_material_file': forms.FileInput(
                 attrs={'class': 'form-control', 'placeholder': 'Study Material File'}),
         }
+
+
+class AnnouncementForm(forms.ModelForm):
+    class Meta:
+        model = Announcement
+        fields = ['branch', 'semester', 'announcement_name', 'announcement_description',
+                  'announcement_date_time']
+        exclude = ['announcement_date_time']
+
+        widgets = {
+            'branch': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Branch'}),
+            'semester': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Semester'}),
+            'announcement_name': forms.TextInput(
+                attrs={'class': 'form-control', 'placeholder': 'Announcement Name'}),
+            'announcement_description': forms.Textarea(
+                attrs={'class': 'form-control', 'placeholder': 'Announcement Description'}),
+        }

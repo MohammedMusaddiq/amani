@@ -1,8 +1,8 @@
 from django.shortcuts import redirect, render
 
 from custom_auth_app.models import Student, Teacher
-from sta.forms import AssignmentForm, StudyMaterialForm
-from sta.models import Assignment, StudyMaterial
+from sta.forms import AssignmentForm, StudyMaterialForm, AnnouncementForm
+from sta.models import Assignment, StudyMaterial, Announcement
 
 
 # student views
@@ -30,9 +30,13 @@ def stu_assignments(request):
 
 
 def stu_study_material(request):
+    user = request.user
+    student = Student.objects.get(user=user)
+    study_materials = StudyMaterial.objects.filter(semester__icontains=student.semester)
     context = {
         'title': 'Student Study Material',
         'navbar_active': 'StuStudyMaterial',
+        'study_materials': study_materials,
     }
     return render(request, 'sta/stu_study_material.html', context)
 
@@ -54,9 +58,13 @@ def seat_allotment(request):
 
 
 def stu_announcements(request):
+    user = request.user
+    student = Student.objects.get(user=user)
+    announcements = Announcement.objects.filter(semester__icontains=student.semester)
     context = {
         'title': 'Student Announcements',
         'navbar_active': 'StuAnnouncements',
+        'announcements': announcements,
     }
     return render(request, 'sta/stu_announcements.html', context)
 
@@ -74,7 +82,8 @@ def teacher_dashboard(request):
 
 
 def tea_assignments(request):
-    assignments = Assignment.objects.all()
+    user = request.user
+    assignments = Assignment.objects.filter(teacher=user)
     context = {
         'title': 'Teacher Assignments',
         'navbar_active': 'TeaAssignments',
@@ -127,7 +136,8 @@ def delete_assignment(request, pk):
 
 
 def tea_study_material(request):
-    study_materials = StudyMaterial.objects.all()
+    user = request.user
+    study_materials = StudyMaterial.objects.filter(teacher=user)
     context = {
         'title': 'Teacher Study Material',
         'navbar_active': 'TeaStudyMaterial',
@@ -187,8 +197,53 @@ def tea_question_forum(request):
 
 
 def tea_announcements(request):
+    user = request.user
+    announcements = Announcement.objects.filter(teacher=user)
     context = {
         'title': 'Teacher Announcements',
         'navbar_active': 'TeaAnnouncements',
+        'announcements': announcements,
     }
     return render(request, 'sta/tea_announcements.html', context)
+
+
+def create_announcement(request):
+    form = AnnouncementForm()
+    if request.method == 'POST':
+        form = AnnouncementForm(request.POST)
+        if form.is_valid():
+            f = form.save(commit=False)
+            f.teacher = request.user
+            f.save()
+            return redirect('sta:tea_announcements')
+        else:
+            print(form.errors)
+    context = {
+        'title': 'Create Announcement',
+        'navbar_active': 'TeaAnnouncements',
+        'form': form,
+    }
+    return render(request, 'sta/create_announcement.html', context)
+
+
+def edit_announcement(request, pk):
+    announcement = Announcement.objects.get(pk=pk)
+    form = AnnouncementForm(instance=announcement)
+    if request.method == 'POST':
+        form = AnnouncementForm(request.POST or None, request.FILES or None, instance=announcement)
+        if form.is_valid():
+            form.save()
+            return redirect('sta:tea_announcements')
+    context = {
+        'title': 'Edit Announcement',
+        'navbar_active': 'TeaAnnouncements',
+        'announcement': announcement,
+        'form': form,
+    }
+    return render(request, 'sta/edit_announcement.html', context)
+
+
+def delete_announcement(request, pk):
+    announcement = Announcement.objects.get(pk=pk)
+    announcement.delete()
+    return redirect('sta:tea_announcements')

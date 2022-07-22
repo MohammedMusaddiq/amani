@@ -23,4 +23,7 @@ urlpatterns = [
     path('t/study_material/delete/<int:pk>/', views.delete_study_material, name='delete_study_material'),
     path('t/question_forum/', views.tea_question_forum, name='tea_question_forum'),
     path('t/announcements/', views.tea_announcements, name='tea_announcements'),
+    path('t/announcements/create/', views.create_announcement, name='create_announcement'),
+    path('t/announcements/edit/<int:pk>/', views.edit_announcement, name='edit_announcement'),
+    path('t/announcements/delete/<int:pk>/', views.delete_announcement, name='delete_announcement'),
 ]
