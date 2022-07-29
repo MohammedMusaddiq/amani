@@ -58,6 +58,16 @@ def teacher_login(request):
     return render(request, 'custom_auth_app/teacher_login.html', {'form': form, 'title': 'Teacher Login'})
 
 
-def logout_view(request):
+def student_logout_view(request):
     logout(request)
-    return redirect('custom_auth_app:welcome')
+    return redirect('custom_auth_app:student_login')
+
+
+def teacher_logout_view(request):
+    logout(request)
+    return redirect('custom_auth_app:teacher_login')
+
+
+def admin_logout_view(request):
+    logout(request)
+    return redirect('cadmin:admin_login')

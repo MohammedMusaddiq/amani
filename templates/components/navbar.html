@@ -51,7 +51,7 @@
                                 class="fa-solid fa-user-check mx-1"></i>{{ request.user.username }}</a>
                     </li>
                     <li class="nav-item me-3 me-lg-0">
-                        <a class="nav-link" href="{% url 'custom_auth_app:logout' %}"><i
+                        <a class="nav-link" href="{% url 'custom_auth_app:student_logout' %}"><i
                                 class="fa-solid fa-right-from-bracket mx-1"></i>Logout</a>
                     </li>
                 </ul>
@@ -86,7 +86,7 @@
                                 class="fa-solid fa-user-check mx-1"></i>{{ request.user.username }}</a>
                     </li>
                     <li class="nav-item me-3 me-lg-0">
-                        <a class="nav-link" href="{% url 'custom_auth_app:logout' %}"><i
+                        <a class="nav-link" href="{% url 'custom_auth_app:teacher_logout' %}"><i
                                 class="fa-solid fa-right-from-bracket mx-1"></i>Logout</a>
                     </li>
                 </ul>
@@ -118,7 +118,7 @@
                                 class="fa-solid fa-user-check mx-1"></i>{{ request.user.username }}</a>
                     </li>
                     <li class="nav-item me-3 me-lg-0">
-                        <a class="nav-link" href="{% url 'custom_auth_app:logout' %}"><i
+                        <a class="nav-link" href="{% url 'custom_auth_app:admin_logout' %}"><i
                                 class="fa-solid fa-right-from-bracket mx-1"></i>Logout</a>
                     </li>
                 </ul>
