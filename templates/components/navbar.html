@@ -90,6 +90,38 @@
                                 class="fa-solid fa-right-from-bracket mx-1"></i>Logout</a>
                     </li>
                 </ul>
+            {% elif  user.is_authenticated and user.is_superuser %}
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <!-- Link -->
+                    <li class="nav-item">
+                        <a class="nav-link {% if navbar_active == 'admin_dashboard' %}active{% endif %}"
+                           href="{% url 'cadmin:admin_dashboard' %}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if navbar_active == 'teachers_list' %}active{% endif %}"
+                           href="{% url 'cadmin:teacher_list' %}">Teachers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if navbar_active == 'students_list' %}active{% endif %}"
+                           href="{% url 'cadmin:students_list' %}">Students</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if navbar_active == 'admin_seat_allotments' %}active{% endif %}"
+                           href="{% url 'cadmin:admin_seat_allotments' %}">Seat Allotments</a>
+                    </li>
+
+                </ul>
+                <!-- Icons -->
+                <ul class="navbar-nav d-flex flex-row me-1">
+                    <li class="nav-item me-3 me-lg-0">
+                        <a class="nav-link" href="#"><i
+                                class="fa-solid fa-user-check mx-1"></i>{{ request.user.username }}</a>
+                    </li>
+                    <li class="nav-item me-3 me-lg-0">
+                        <a class="nav-link" href="{% url 'custom_auth_app:logout' %}"><i
+                                class="fa-solid fa-right-from-bracket mx-1"></i>Logout</a>
+                    </li>
+                </ul>
             {% endif %}
         </div>
     </div>

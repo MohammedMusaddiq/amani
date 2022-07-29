@@ -5,7 +5,20 @@ from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import User, Student, Teacher, Subjects
 
 
+class StudentInline(admin.StackedInline):
+    model = Student
+    can_delete = False
+    verbose_name_plural = 'Student'
+
+
+class TeacherInline(admin.StackedInline):
+    model = Teacher
+    can_delete = False
+    verbose_name_plural = 'Teacher'
+
+
 class UserAdmin(AuthAdmin):
+    inlines = [StudentInline, TeacherInline]
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = User
@@ -20,7 +33,8 @@ class UserAdmin(AuthAdmin):
         (None, {
             'classes': ('wide',),
             'fields': (
-            'username', 'password1', 'password2', 'is_superuser', 'is_staff', 'is_active', 'is_student', 'is_teacher')}
+                'username', 'password1', 'password2', 'is_superuser', 'is_staff', 'is_active', 'is_student',
+                'is_teacher')}
          ),
     )
     search_fields = ('username',)
@@ -49,7 +63,7 @@ admin.site.register(Student, StudentAdmin)
 
 
 class TeacherAdmin(admin.ModelAdmin):
-    inlines = [SubjectInline, ]
+    inlines = [SubjectInline]
     list_display = ('user', 'branch',)
     list_filter = ('user', 'branch',)
     fieldsets = (
@@ -60,3 +74,5 @@ class TeacherAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Teacher, TeacherAdmin)
+
+admin.site.register(Subjects)

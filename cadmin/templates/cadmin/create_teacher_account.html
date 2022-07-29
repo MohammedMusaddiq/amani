@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ title }}
+{% endblock title %}
+{% block css %}
+    <style>
+        .content-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .content-center-partial {
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+    </style>
+{% endblock css %}
+{% block navbar %}
+    {% include "components/navbar.html" %}
+{% endblock navbar %}
+{% block content %}
+    <div class="container">
+        <div class="row p-4 content-center-partial">
+            <div class="card shadow-custom">
+                <div class="card-body">
+                    <h1 class="card-text text-center">Create Teacher Account</h1>
+                    <hr>
+                    <div class="my-1">{% include "components/alert.html" %}</div>
+                    <div class="row">
+                        <form action="{% url 'cadmin:create_teacher_account' %}" method="post">
+                            {% csrf_token %}
+                            {{ t_form }}
+                            <hr>
+                            <h6>Subject: <a href="#" id="add-sub-btn">add another subject</a>
+                            </h6>
+                            {{ sub_form }}
+                            <div id="subjects" class="mt-2">
+
+                            </div>
+                            <input type="submit" class="btn  btn-success mt-2 col-2" value="create">
+                            <a href="{% url 'cadmin:teacher_list' %}" class="btn btn-dark col-2">back</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+{% block footer %}
+    {% include "components/footer.html" %}
+{% endblock footer %}
+{% block js %}
+    <script>
+        $(document).ready(function () {
+            const addBtn = $("#add-sub-btn")
+            const formDiv = $("#subjects")
+            let count = 0
+            addBtn.click(function (event) {
+                event.preventDefault()
+
+                let html = `
+                        <div id="subForm-${count}">
+                            <h6>Subject: <a href="#" id="remove-sub-btn" class="text-danger" onclick="removeSubForm(${count})">remove</a></h6>
+                            {{ sub_form }}
+                        </div>
+                `
+                formDiv.append(html)
+                count += 1
+            })
+        })
+        function removeSubForm(idx) {
+                const dupForm = $(`#subForm-${idx}`)
+                dupForm.remove()
+        }
+    </script>
+{% endblock %}

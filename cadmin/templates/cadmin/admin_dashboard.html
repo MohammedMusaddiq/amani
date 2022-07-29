@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ title }}
+{% endblock title %}
+{% block css %}
+    <style>
+        .content-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .content-center-partial {
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+    </style>
+{% endblock css %}
+{% block navbar %}
+    {% include "components/navbar.html" %}
+{% endblock navbar %}
+{% block content %}
+    <div class="container">
+        <div class="row p-4 content-center-partial">
+            <div class="card shadow-custom">
+                <div class="card-body">
+                    <h1 class="card-text text-center">Welcome Admin</h1>
+                    <hr>
+                    <div class="my-1">{% include "components/alert.html" %}</div>
+                    <div class="row">
+                        <h5>Manage Teachers and Students Account: </h5>
+                        <hr class="mb-1">
+                        <a href="{% url 'cadmin:teacher_list' %}">Teachers List</a>
+                        <a href="{% url 'cadmin:students_list' %}">Student List</a>
+                        <h5 class="mt-2">Create Add Teacher or Student</h5>
+                        <hr class="mb-1">
+                        <a href="{% url 'cadmin:create_teacher_account' %}">Add Teachers</a>
+                        <a href="{% url 'cadmin:create_student_account' %}">Add Student</a>
+                        <h5 class="mt-2">Seat Allotments For Exam / Internals</h5>
+                        <hr class="mb-1">
+                        <a href="{% url 'cadmin:admin_seat_allotments' %}">Seat Allotments</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block footer %}
+    {% include "components/footer.html" %}
+{% endblock footer %}

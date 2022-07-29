@@ -13,7 +13,7 @@ class User(AbstractUser):
 
 class Student(models.Model):
     user = models.OneToOneField(
-        User, on_delete=models.CASCADE, primary_key=True)
+        User, on_delete=models.CASCADE, null=True, blank=True)
     branch = models.CharField(max_length=100)
     semester = models.CharField(max_length=100)
     roll_no = models.CharField(max_length=100)
@@ -28,7 +28,7 @@ class Student(models.Model):
 
 class Teacher(models.Model):
     user = models.OneToOneField(
-        User, on_delete=models.CASCADE, primary_key=True)
+        User, on_delete=models.CASCADE, null=True, blank=True)
     branch = models.CharField(max_length=100)
 
     class Meta:
@@ -40,7 +40,7 @@ class Teacher(models.Model):
 
 
 class Subjects(models.Model):
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True, blank=True)
     semester = models.CharField(max_length=100)
     subject = models.CharField(max_length=100)
 

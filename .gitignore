@@ -1,5 +1,5 @@
 .vscode
-_cmaenv_
+.env
 .idea
 migrations
 __pycache__/
