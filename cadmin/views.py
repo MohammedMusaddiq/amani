@@ -169,3 +169,27 @@ def create_student_account(request):
         's_form': s_form,
     }
     return render(request, 'cadmin/create_student_account.html', context)
+
+
+def delete_teacher(request, idx):
+    try:
+        teacher = Teacher.objects.get(id=idx)
+        teacher.user.delete()
+        teacher.delete()
+        messages.success(request, f'Teacher account deleted for {teacher.user.username}')
+        return redirect('cadmin:teacher_list')
+    except Exception as e:
+        messages.error(request, f'Error: {e}')
+        return redirect('cadmin:teacher_list')
+
+
+def student_delete(request, idx):
+    try:
+        student = Student.objects.get(id=idx)
+        student.user.delete()
+        student.delete()
+        messages.success(request, f'Student account deleted for {student.user.username}')
+        return redirect('cadmin:students_list')
+    except Exception as e:
+        messages.error(request, f'Error: {e}')
+        return redirect('cadmin:students_list')

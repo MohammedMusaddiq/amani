@@ -44,6 +44,7 @@
                                         <th scope="col" class="fw-bold">#</th>
                                         <th scope="col" class="fw-bold">Name</th>
                                         <th scope="col" class="fw-bold">Branch</th>
+                                        <th scope="col" class="fw-bold">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -52,6 +53,9 @@
                                             <th scope="row">{{ forloop.counter }}</th>
                                             <td>{{ teacher.user }}</td>
                                             <td>{{ teacher.branch }}</td>
+                                            <td><i class="fa-solid fa-trash-can" data-mdb-toggle="modal"
+                                                   data-mdb-target="#delete-modal" id="deleteIcon"
+                                                   data-id="{{ teacher.pk }}"></i></td>
                                         </tr>
                                     {% empty %}
                                         <tr>
@@ -62,6 +66,28 @@
                                 </table>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal-space">
+        <div class="modal top fade" id="delete-modal" tabindex="-1" aria-labelledby="deleteModal"
+             aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
+            <div class="modal-dialog modal-sm ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
+                        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        are you sure you want to delete this record
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-secondary" data-mdb-dismiss="modal">
+                            Close
+                        </button>
+                        <a href="" id="deleteConfirmation" class="btn btn-sm btn-danger">Delete</a>
                     </div>
                 </div>
             </div>
@@ -80,6 +106,12 @@
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                 });
             });
+            $("[id='deleteIcon']").click(function () {
+                let id = $(this).data("id");
+                let url = "{% url 'cadmin:delete_teacher' 111 %}"
+                let newUrl = url.replace('111', id)
+                $("#deleteConfirmation").attr("href", newUrl)
+            })
         });
     </script>
 {% endblock %}
