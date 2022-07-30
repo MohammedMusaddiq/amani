@@ -2,10 +2,26 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 
+from cadmin.models import Visitor
 from .forms import StudentLoginForm, TeacherLoginForm
 
 
+def visitor_ip_address(request):
+    return x_forwarded_for.split(',')[0] if (
+        x_forwarded_for := request.META.get('HTTP_X_FORWARDED_FOR')) else request.META.get('REMOTE_ADDR')
+
+
 def welcome_view(request):
+    ip = visitor_ip_address(request)
+    if Visitor.objects.filter(ip_address__iexact=ip).exists():
+        v = Visitor.objects.filter(ip_address__iexact=ip).first()
+        v.count = v.count + 1
+        v.save()
+    else:
+        Visitor.objects.create(
+            ip_address=ip,
+            count=1
+        )
     context = {
         'title': 'Welcome to Digi Academy',
     }
